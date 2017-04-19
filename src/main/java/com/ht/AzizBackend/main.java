@@ -5,10 +5,6 @@
  */
 package com.ht.AzizBackend;
 
-/**
- *
- * @author Yasser
- */
 public class main {
 
   /**
