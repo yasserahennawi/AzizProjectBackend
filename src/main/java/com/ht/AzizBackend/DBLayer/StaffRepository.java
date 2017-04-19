@@ -28,7 +28,7 @@ public class StaffRepository {
 
   public Staff addStaff(Staff staff) throws Exception {
     try {
-      String insert = "INSERT INTO staff(staffID, staffFirstname, staffLastname, gender, degree, address) VALUES('" + staff.getStaffID() + "','" + staff.getStaffFirstname() + "','" + staff.getStaffLastname() + "','" + staff.getGender() + "','" + staff.getDegree() + "','" + staff.getAddress() + "')";
+      String insert = "INSERT INTO staff(staff_id, staff_firstname, staff_secondname, ganeder, degree, address) VALUES('" + staff.getStaffID() + "','" + staff.getStaffFirstname() + "','" + staff.getStaffLastname() + "','" + staff.getGender() + "','" + staff.getDegree() + "','" + staff.getAddress() + "')";
       stat.executeUpdate(insert);
     } catch (Exception e) {
       throw e;
@@ -38,17 +38,17 @@ public class StaffRepository {
 
   public ArrayList<Staff> getStaffByID(String id) throws Exception {
     try {
-      String query = "SELECT * FROM staff WHERE staffID='" + id + "'";
+      String query = "SELECT * FROM staff WHERE staff_id='" + id + "'";
       rs = stat.executeQuery(query);
       ArrayList<Staff> staffs = new ArrayList<>();
       while (rs.next()) {
-        String staffID = rs.getString("staffID");
-        String staffFirstname = rs.getString("staffFirstname");
-        String staffLastname = rs.getString("staffLastname");
-        String gender = rs.getString("gender");
+        String staff_id = rs.getString("staff_id");
+        String staff_firstname = rs.getString("staff_firstname");
+        String staff_secondname = rs.getString("staff_secondname");
+        String ganeder = rs.getString("ganeder");
         String degree = rs.getString("degree");
         String address = rs.getString("address");
-        Staff staff = new Staff(staffID, staffFirstname, staffLastname, gender, degree, address);
+        Staff staff = new Staff(staff_id, staff_firstname, staff_secondname, ganeder, degree, address);
         staffs.add(staff);
       }
       return staffs;

@@ -4,15 +4,15 @@ public class Staff {
 
   private String staffID;
   private String staffFirstname;
-  private String staffLastname;
+  private String staffSecondname;
   private String gender;
   private String degree;
   private String address;
 
-  public Staff(String staffID, String staffFirstname, String staffLastname, String gender, String degree, String address) {
+  public Staff(String staffID, String staffFirstname, String staffSecondname, String gender, String degree, String address) {
     this.staffID = staffID;
     this.staffFirstname = staffFirstname;
-    this.staffLastname = staffLastname;
+    this.staffSecondname = staffSecondname;
     this.gender = gender;
     this.degree = degree;
     this.address = address;
@@ -27,7 +27,7 @@ public class Staff {
   }
 
   public String getStaffLastname() {
-    return staffLastname;
+    return staffSecondname;
   }
 
   public String getGender() {

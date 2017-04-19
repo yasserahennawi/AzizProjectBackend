@@ -5,13 +5,32 @@
  */
 package com.ht.AzizBackend;
 
+import com.ht.AzizBackend.DBLayer.StaffRepository;
+import com.ht.AzizBackend.ModelLayer.Staff;
+import java.util.ArrayList;
+import spark.Request;
+import spark.Response;
+import static spark.Spark.*;
+
 public class main {
 
-  /**
-   * @param args the command line arguments
-   */
+    static StaffRepository staffRepository = new StaffRepository();
+    static ArrayList<Staff> staff ;
   public static void main(String[] args) {
-    // TODO code application logic here
+      
+      StringBuilder stringBuilder = new StringBuilder();
+      
+    get( "/" , (Request req , Response res) -> {
+        return "wzza tezo 7mra";
+    });
+    get ( "/staff/:staffID" , (req,res) -> {
+        try {
+          staff = staffRepository.getStaffByID(req.params("staffID"));
+            return staff.get(0).getStaffFirstname();
+        }  catch  ( Exception e ){
+            return e;
+        }
+    });
   }
   
 }
