@@ -7,33 +7,36 @@ package com.ht.AzizBackend.DBLayer;
 
 import com.ht.AzizBackend.ModelLayer.Subject;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SubjectsRepository {
 
   private Statement stat;
   private ResultSet rs;
 
-  public SubjectsRepository() {
-    try {
-      SQLConfig config = SQLConfig.getInstance();
-      System.out.println("Database connection established");
-      stat = config.con.createStatement();
-
-    } catch (Exception e) {
-      System.out.println(e);
-    }
+  public SubjectsRepository(){
+      SQLConfig config = null;
+      try {
+          config = SQLConfig.getInstance();
+          stat = config.con.createStatement();
+      } catch (Exception ex) {
+          Logger.getLogger(SubjectsRepository.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(SubjectsRepository.class.getName()).log(Level.SEVERE, null, ex);
+      }
   }
 
   public Subject addSubject(Subject subject) throws Exception {
     try {
       String insert = "INSERT INTO subjects(subject_id, sub_dept_name, subject_name, chr_no, subject_degree) VALUES('" + subject.getSubject_id() + "','" + subject.getSub_dept_name()+ "','" + subject.getSubject_name() + "','" + subject.getChr_no() + "','" + subject.getSubject_degree() + "')";
       stat.executeUpdate(insert);
+      return subject;
     } catch (Exception e) {
       throw e;
     }
-    return subject;
   }
 
   public ArrayList<Subject> getSubjectByID(String id) throws Exception {

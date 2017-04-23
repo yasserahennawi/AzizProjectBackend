@@ -18,7 +18,6 @@ public class Sub_deptsRepository {
   public Sub_deptsRepository() {
     try {
       SQLConfig config = SQLConfig.getInstance();
-      System.out.println("Database connection established");
       stat = config.con.createStatement();
 
     } catch (Exception e) {
@@ -28,7 +27,7 @@ public class Sub_deptsRepository {
 
   public Sub_dept addSub_dept(Sub_dept sub_dept) throws Exception {
     try {
-      String insert = "INSERT INTO sub_depts(sub_dept_id, sub_dept_name) VALUES('" + sub_dept.getSub_dept_id() + "','" + sub_dept.getSub_dept_name()+ "')";
+      String insert = "INSERT INTO sub_depts(sub_depts_id, sub_depts_name) VALUES('" + sub_dept.getSub_depts_id() + "','" + sub_dept.getSub_depts_name()+ "')";
       stat.executeUpdate(insert);
     } catch (Exception e) {
       throw e;
@@ -38,13 +37,13 @@ public class Sub_deptsRepository {
 
   public ArrayList<Sub_dept> getSub_deptByID(String id) throws Exception {
     try {
-      String query = "SELECT * FROM sub_dept WHERE sub_dept_id='" + id + "'";
+      String query = "SELECT * FROM sub_depts WHERE sub_depts_id='" + id + "'";
       rs = stat.executeQuery(query);
       ArrayList<Sub_dept> sub_depts = new ArrayList<>();
       while (rs.next()) {
-        String sub_dept_id = rs.getString("sub_dept_id");
-        String sub_dept_name = rs.getString("sub_dept_name");
-        Sub_dept sub_dept = new Sub_dept(sub_dept_id, sub_dept_name);
+        String sub_depts_id = rs.getString("sub_depts_id");
+        String sub_depts_name = rs.getString("sub_depts_name");
+        Sub_dept sub_dept = new Sub_dept(sub_depts_id, sub_depts_name);
         sub_depts.add(sub_dept);
       }
       return sub_depts;
@@ -55,13 +54,13 @@ public class Sub_deptsRepository {
 
   public ArrayList<Sub_dept> getAllSub_dept() throws Exception {
     try {
-      String query = "SELECT * FROM sub_dept";
+      String query = "SELECT * FROM sub_depts";
       rs = stat.executeQuery(query);
       ArrayList<Sub_dept> sub_depts = new ArrayList<>();
       while (rs.next()) {
-        String sub_dept_id = rs.getString("sub_dept_id");
-        String sub_dept_name = rs.getString("sub_dept_name");
-        Sub_dept sub_dept = new Sub_dept(sub_dept_id, sub_dept_name);
+        String sub_depts_id = rs.getString("sub_depts_id");
+        String sub_depts_name = rs.getString("sub_depts_name");
+        Sub_dept sub_dept = new Sub_dept(sub_depts_id, sub_depts_name);
         sub_depts.add(sub_dept);
       }
       return sub_depts;

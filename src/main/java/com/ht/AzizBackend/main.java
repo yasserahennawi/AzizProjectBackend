@@ -19,19 +19,20 @@ import static spark.Spark.*;
 
 public class main {
 
-  static StaffRepository staffRepository = new StaffRepository();
-  static ClassesRepository classesRepository = new ClassesRepository();
-  static StudentsRepository studentsRepository = new StudentsRepository();
-  static Sub_deptsRepository sub_deptsRepository = new Sub_deptsRepository();
-  static SubjectsRepository subjectsRepository = new SubjectsRepository();
-  static ArrayList<Staff> staff ;
   public static void main(String[] args) {
+     StaffRepository staffRepository = new StaffRepository();
+     ClassesRepository classesRepository = new ClassesRepository();
+     StudentsRepository studentsRepository = new StudentsRepository();
+     Sub_deptsRepository sub_deptsRepository = new Sub_deptsRepository();
+     SubjectsRepository subjectsRepository = new SubjectsRepository();
+     ArrayList<Staff> staff ;
       
     enableCORS("*", "*", "*");
     
     Gson gson = new Gson();
       
     get( "/" , (Request req , Response res) -> {
+        System.out.println("wzza tezo 7mra");
         return "wzza tezo 7mra";
     });
     

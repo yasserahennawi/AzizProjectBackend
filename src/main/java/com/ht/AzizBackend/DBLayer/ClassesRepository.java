@@ -18,7 +18,6 @@ public class ClassesRepository {
   public ClassesRepository() {
     try {
       SQLConfig config = SQLConfig.getInstance();
-      System.out.println("Database connection established");
       stat = config.con.createStatement();
     } catch (Exception e) {
       System.out.println(e);
@@ -27,7 +26,7 @@ public class ClassesRepository {
 
   public Classes addClasses(Classes classes) throws Exception {
     try {
-      String insert = "INSERT INTO staff(class_id, class_type) VALUES('" + classes.getClassID() + "','" + classes.getClassType() + "')";
+      String insert = "INSERT INTO staff(class_id, class_type) VALUES('" + classes.getClass_id()+ "','" + classes.getClass_type()+ "')";
       stat.executeUpdate(insert);
     } catch (Exception e) {
       throw e;
@@ -37,13 +36,13 @@ public class ClassesRepository {
 
   public ArrayList<Classes> getClassesByID(String id) throws Exception {
     try {
-      String query = "SELECT * FROM classes WHERE classID='" + id + "'";
+      String query = "SELECT * FROM classes WHERE class_id='" + id + "'";
       rs = stat.executeQuery(query);
       ArrayList<Classes> classesArray = new ArrayList<>();
       while (rs.next()) {
-        String classID = rs.getString("classID");
-        String classType = rs.getString("classType");
-        Classes classes = new Classes(classID, classType);
+        String class_id = rs.getString("class_id");
+        String class_type = rs.getString("class_type");
+        Classes classes = new Classes(class_id, class_type);
         classesArray.add(classes);
       }
       return classesArray;

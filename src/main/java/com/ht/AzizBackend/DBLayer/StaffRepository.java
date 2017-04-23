@@ -28,7 +28,7 @@ public class StaffRepository {
 
   public Staff addStaff(Staff staff) throws Exception {
     try {
-      String insert = "INSERT INTO staff(staff_id, staff_firstname, staff_secondname, ganeder, degree, address) VALUES('" + staff.getStaffID() + "','" + staff.getStaffFirstname() + "','" + staff.getStaffLastname() + "','" + staff.getGender() + "','" + staff.getDegree() + "','" + staff.getAddress() + "')";
+      String insert = "INSERT INTO staff(staff_id, staff_firstname, staff_secondname, ganeder, degree, address) VALUES('" + staff.getStaff_id() + "','" + staff.getStaff_firstname() + "','" + staff.getStaff_secondname()+ "','" + staff.getGaneder() + "','" + staff.getDegree() + "','" + staff.getAddress() + "')";
       stat.executeUpdate(insert);
     } catch (Exception e) {
       throw e;
@@ -71,10 +71,8 @@ public class StaffRepository {
         String degree = rs.getString("degree");
         String address = rs.getString("address");
         Staff staff = new Staff(staff_id, staff_firstname, staff_secondname, ganeder, degree, address);
-        System.out.println(staff);
         staffs.add(staff);
       }
-      System.out.println(staffs);
       return staffs;
 
     } catch (Exception e) {
