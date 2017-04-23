@@ -18,7 +18,6 @@ public class StudentsRepository {
   public StudentsRepository() {
     try {
       SQLConfig config = SQLConfig.getInstance();
-      System.out.println("Database connection established");
       stat = config.con.createStatement();
 
     } catch (Exception e) {

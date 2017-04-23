@@ -2,22 +2,22 @@ package com.ht.AzizBackend.ModelLayer;
 
 public class Classes {
 
-  private String classID;
-  private String classType;
+  private String class_id;
+  private String class_type;
 
-  public Classes(String classID, String classType) {
-    this.classID = classID;
-    this.classType = classType;
-  }
+    public Classes(String class_id, String class_type) {
+        this.class_id = class_id;
+        this.class_type = class_type;
+    }
 
-  public String getClassID() {
-    return classID;
-  }
+    public String getClass_id() {
+        return class_id;
+    }
 
-  public String getClassType() {
-    return classType;
-  }
+    public String getClass_type() {
+        return class_type;
+    }
 
-
+ 
   
 }
