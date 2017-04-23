@@ -27,7 +27,7 @@ public class ClassesRepository {
 
   public Classes addClasses(Classes classes) throws Exception {
     try {
-      String insert = "INSERT INTO staff(classID, classType) VALUES('" + classes.getClassID() + "','" + classes.getClassType() + "')";
+      String insert = "INSERT INTO staff(class_id, class_type) VALUES('" + classes.getClassID() + "','" + classes.getClassType() + "')";
       stat.executeUpdate(insert);
     } catch (Exception e) {
       throw e;
@@ -44,6 +44,23 @@ public class ClassesRepository {
         String classID = rs.getString("classID");
         String classType = rs.getString("classType");
         Classes classes = new Classes(classID, classType);
+        classesArray.add(classes);
+      }
+      return classesArray;
+    } catch (Exception e) {
+      throw e ;
+    }
+  }
+
+  public ArrayList<Classes> getAllClasses() throws Exception {
+    try {
+      String query = "SELECT * FROM classes";
+      rs = stat.executeQuery(query);
+      ArrayList<Classes> classesArray = new ArrayList<>();
+      while (rs.next()) {
+        String class_id = rs.getString("class_id");
+        String class_type = rs.getString("class_type");
+        Classes classes = new Classes(class_id, class_type);
         classesArray.add(classes);
       }
       return classesArray;

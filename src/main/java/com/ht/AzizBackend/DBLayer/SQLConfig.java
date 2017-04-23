@@ -18,9 +18,8 @@ public class SQLConfig {
   public Connection con;
   private static SQLConfig instance;
 
-  private SQLConfig() {
+  private SQLConfig() throws Exception {
     try {
-
       Class.forName("com.mysql.jdbc.Driver");
       con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/project", "root", "");
@@ -30,15 +29,15 @@ public class SQLConfig {
 
     } catch (SQLException | ClassNotFoundException e) {
       System.out.println("Not connected");
+      throw e ;
 
     }
   }
 
-  public static SQLConfig getInstance() {
+  public static SQLConfig getInstance() throws Exception {
     if (instance == null) {
       instance = new SQLConfig();
     }
     return instance;
-
   }
 }
