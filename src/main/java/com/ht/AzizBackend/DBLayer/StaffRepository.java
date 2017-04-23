@@ -58,5 +58,29 @@ public class StaffRepository {
     }
 
   }
+  public ArrayList<Staff> getAllStaff() throws Exception {
+    try {
+      String query = "SELECT * FROM staff";
+      rs = stat.executeQuery(query);
+      ArrayList<Staff> staffs = new ArrayList<>();
+      while (rs.next()) {
+        String staff_id = rs.getString("staff_id");
+        String staff_firstname = rs.getString("staff_firstname");
+        String staff_secondname = rs.getString("staff_secondname");
+        String ganeder = rs.getString("ganeder");
+        String degree = rs.getString("degree");
+        String address = rs.getString("address");
+        Staff staff = new Staff(staff_id, staff_firstname, staff_secondname, ganeder, degree, address);
+        System.out.println(staff);
+        staffs.add(staff);
+      }
+      System.out.println(staffs);
+      return staffs;
+
+    } catch (Exception e) {
+      throw e ;
+    }
+
+  }
 
 }
