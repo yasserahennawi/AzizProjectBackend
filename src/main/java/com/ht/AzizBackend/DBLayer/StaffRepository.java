@@ -36,28 +36,6 @@ public class StaffRepository {
     return staff;
   }
 
-  public ArrayList<Staff> getStaffByID(String id) throws Exception {
-    try {
-      String query = "SELECT * FROM staff WHERE staff_id='" + id + "'";
-      rs = stat.executeQuery(query);
-      ArrayList<Staff> staffs = new ArrayList<>();
-      while (rs.next()) {
-        String staff_id = rs.getString("staff_id");
-        String staff_firstname = rs.getString("staff_firstname");
-        String staff_secondname = rs.getString("staff_secondname");
-        String ganeder = rs.getString("ganeder");
-        String degree = rs.getString("degree");
-        String address = rs.getString("address");
-        Staff staff = new Staff(staff_id, staff_firstname, staff_secondname, ganeder, degree, address);
-        staffs.add(staff);
-      }
-      return staffs;
-
-    } catch (Exception e) {
-      throw e ;
-    }
-
-  }
   public ArrayList<Staff> getAllStaff() throws Exception {
     try {
       String query = "SELECT * FROM staff";
@@ -79,6 +57,36 @@ public class StaffRepository {
       throw e ;
     }
 
+  }
+  public ArrayList<Staff> getStaffByID(String id) throws Exception {
+    try {
+      String query = "SELECT * FROM staff WHERE staff_id='" + id + "'";
+      rs = stat.executeQuery(query);
+      ArrayList<Staff> staffs = new ArrayList<>();
+      while (rs.next()) {
+        String staff_id = rs.getString("staff_id");
+        String staff_firstname = rs.getString("staff_firstname");
+        String staff_secondname = rs.getString("staff_secondname");
+        String ganeder = rs.getString("ganeder");
+        String degree = rs.getString("degree");
+        String address = rs.getString("address");
+        Staff staff = new Staff(staff_id, staff_firstname, staff_secondname, ganeder, degree, address);
+        staffs.add(staff);
+      }
+      return staffs;
+    } catch (Exception e) {
+      throw e ;
+    }
+  }
+  
+  public Staff deleteStaff(Staff staff) throws Exception {
+    try {
+      String delete = "DELETE FROM staff WHERE staff_id = '" + staff.getStaff_id() + "'" ;
+      stat.executeUpdate(delete);
+    } catch (Exception e) {
+      throw e ;
+    }
+    return staff;
   }
 
 }

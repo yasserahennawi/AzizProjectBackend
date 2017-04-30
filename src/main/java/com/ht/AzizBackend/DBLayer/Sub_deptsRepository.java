@@ -35,23 +35,6 @@ public class Sub_deptsRepository {
     return sub_dept;
   }
 
-  public ArrayList<Sub_dept> getSub_deptByID(String id) throws Exception {
-    try {
-      String query = "SELECT * FROM sub_depts WHERE sub_depts_id='" + id + "'";
-      rs = stat.executeQuery(query);
-      ArrayList<Sub_dept> sub_depts = new ArrayList<>();
-      while (rs.next()) {
-        String sub_depts_id = rs.getString("sub_depts_id");
-        String sub_depts_name = rs.getString("sub_depts_name");
-        Sub_dept sub_dept = new Sub_dept(sub_depts_id, sub_depts_name);
-        sub_depts.add(sub_dept);
-      }
-      return sub_depts;
-    } catch (Exception e) {
-      throw e ;
-    }
-  }
-
   public ArrayList<Sub_dept> getAllSub_dept() throws Exception {
     try {
       String query = "SELECT * FROM sub_depts";
@@ -68,4 +51,32 @@ public class Sub_deptsRepository {
       throw e ;
     }
   }
+
+  public ArrayList<Sub_dept> getSub_deptByID(String id) throws Exception {
+    try {
+      String query = "SELECT * FROM sub_depts WHERE sub_depts_id='" + id + "'";
+      rs = stat.executeQuery(query);
+      ArrayList<Sub_dept> sub_depts = new ArrayList<>();
+      while (rs.next()) {
+        String sub_depts_id = rs.getString("sub_depts_id");
+        String sub_depts_name = rs.getString("sub_depts_name");
+        Sub_dept sub_dept = new Sub_dept(sub_depts_id, sub_depts_name);
+        sub_depts.add(sub_dept);
+      }
+      return sub_depts;
+    } catch (Exception e) {
+      throw e ;
+    }
+  }
+  
+  public Sub_dept deleteSub_dept(Sub_dept sub_dept) throws Exception {
+    try {
+      String delete = "DELETE FROM sub_depts WHERE sub_depts_id = '" + sub_dept.getSub_depts_id() + "'" ;
+      stat.executeUpdate(delete);
+    } catch (Exception e) {
+      throw e ;
+    }
+    return sub_dept;
+  }
+
 }

@@ -35,31 +35,6 @@ public class StudentsRepository {
     return student;
   }
 
-  public ArrayList<Student> getStudentByID(String id) throws Exception {
-    try {
-      String query = "SELECT * FROM students WHERE student_id='" + id + "'";
-      rs = stat.executeQuery(query);
-      ArrayList<Student> students = new ArrayList<>();
-      while (rs.next()) {
-        String student_id = rs.getString("student_id");
-        String student_firstname = rs.getString("student_firstname");
-        String student_lastname = rs.getString("student_lastname");
-        String student_gander = rs.getString("student_gander");
-        String section = rs.getString("section");
-        String division = rs.getString("division");
-        String stage = rs.getString("stage");
-        String address = rs.getString("address");
-        Student student = new Student(student_id, student_firstname, student_lastname, student_gander, section, division, stage, address);
-        students.add(student);
-      }
-      return students;
-
-    } catch (Exception e) {
-      throw e ;
-    }
-
-  }
-
   public ArrayList<Student> getAllStudent() throws Exception {
     try {
       String query = "SELECT * FROM students";
@@ -82,4 +57,40 @@ public class StudentsRepository {
       throw e ;
     }
   }
+
+  public ArrayList<Student> getStudentByID(String id) throws Exception {
+    try {
+      String query = "SELECT * FROM students WHERE student_id='" + id + "'";
+      rs = stat.executeQuery(query);
+      ArrayList<Student> students = new ArrayList<>();
+      while (rs.next()) {
+        String student_id = rs.getString("student_id");
+        String student_firstname = rs.getString("student_firstname");
+        String student_lastname = rs.getString("student_lastname");
+        String student_gander = rs.getString("student_gander");
+        String section = rs.getString("section");
+        String division = rs.getString("division");
+        String stage = rs.getString("stage");
+        String address = rs.getString("address");
+        Student student = new Student(student_id, student_firstname, student_lastname, student_gander, section, division, stage, address);
+        students.add(student);
+      }
+      return students;
+
+    } catch (Exception e) {
+      throw e ;
+    }
+  }
+  
+
+  public Student deleteStudent(Student student) throws Exception {
+    try {
+      String delete = "DELETE FROM students WHERE student_id = '" + student.getStudent_ID() + "'" ;
+      stat.executeUpdate(delete);
+    } catch (Exception e) {
+      throw e ;
+    }
+    return student;
+  }
+
 }

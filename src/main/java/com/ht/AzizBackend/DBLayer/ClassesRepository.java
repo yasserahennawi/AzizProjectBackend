@@ -26,12 +26,30 @@ public class ClassesRepository {
 
   public Classes addClasses(Classes classes) throws Exception {
     try {
-      String insert = "INSERT INTO staff(class_id, class_type) VALUES('" + classes.getClass_id()+ "','" + classes.getClass_type()+ "')";
+      String insert = "INSERT INTO staff(class_id, class_type) VALUES('" + classes.getClass_id() + "','" + classes.getClass_type() + "')";
       stat.executeUpdate(insert);
     } catch (Exception e) {
       throw e;
     }
     return classes;
+  }
+
+
+  public ArrayList<Classes> getAllClasses() throws Exception {
+    try {
+      String query = "SELECT * FROM classes";
+      rs = stat.executeQuery(query);
+      ArrayList<Classes> classesArray = new ArrayList<>();
+      while (rs.next()) {
+        String class_id = rs.getString("class_id");
+        String class_type = rs.getString("class_type");
+        Classes classes = new Classes(class_id, class_type);
+        classesArray.add(classes);
+      }
+      return classesArray;
+    } catch (Exception e) {
+      throw e;
+    }
   }
 
   public ArrayList<Classes> getClassesByID(String id) throws Exception {
@@ -47,24 +65,18 @@ public class ClassesRepository {
       }
       return classesArray;
     } catch (Exception e) {
-      throw e ;
+      throw e;
     }
   }
-
-  public ArrayList<Classes> getAllClasses() throws Exception {
+  
+  public Classes deleteClass(Classes classes) throws Exception {
     try {
-      String query = "SELECT * FROM classes";
-      rs = stat.executeQuery(query);
-      ArrayList<Classes> classesArray = new ArrayList<>();
-      while (rs.next()) {
-        String class_id = rs.getString("class_id");
-        String class_type = rs.getString("class_type");
-        Classes classes = new Classes(class_id, class_type);
-        classesArray.add(classes);
-      }
-      return classesArray;
+      String delete = "DELETE FROM classes WHERE class_id = '" + classes.getClass_id() + "'" ;
+      stat.executeUpdate(delete);
     } catch (Exception e) {
       throw e ;
     }
+    return classes;
   }
+
 }
