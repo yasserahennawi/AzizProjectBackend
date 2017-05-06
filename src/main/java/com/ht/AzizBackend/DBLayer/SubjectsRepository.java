@@ -91,5 +91,23 @@ public class SubjectsRepository {
     }
     return subject;
   }
+  
 
+  public Subject editSubject(Subject oldSubject, Subject newSubject) throws Exception {
+    try {
+      String edit = 
+        "UPDATE subjects SET "
+        + "subject_id = '" + newSubject.getSubject_id()
+        + "', sub_depts_name = '" + newSubject.getSub_dept_name()
+        + "', subject_name = '" + newSubject.getSubject_name()
+        + "', chr_no = '" + newSubject.getChr_no()
+        + "', subject_degree = '" + newSubject.getSubject_degree()
+        + "' WHERE subject_id = '" + oldSubject.getSubject_id()+"'";
+      stat.executeUpdate(edit);
+    } catch (Exception e) {
+      throw e ;
+    }
+    return newSubject;
+  }
+      
 }

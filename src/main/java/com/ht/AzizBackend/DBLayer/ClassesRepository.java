@@ -26,7 +26,7 @@ public class ClassesRepository {
 
   public Classes addClasses(Classes classes) throws Exception {
     try {
-      String insert = "INSERT INTO staff(class_id, class_type) VALUES('" + classes.getClass_id() + "','" + classes.getClass_type() + "')";
+      String insert = "INSERT INTO classes(class_id, class_type) VALUES('" + classes.getClass_id() + "','" + classes.getClass_type() + "')";
       stat.executeUpdate(insert);
     } catch (Exception e) {
       throw e;
@@ -79,4 +79,17 @@ public class ClassesRepository {
     return classes;
   }
 
+  public Classes editClass(Classes oldClass, Classes newClass) throws Exception {
+    try {
+      String edit = 
+        "UPDATE classes SET "
+        + "class_id = '" + newClass.getClass_id()
+        + "', class_type = '" + newClass.getClass_type()
+        + "' WHERE class_id = '" + oldClass.getClass_id()+"'";
+      stat.executeUpdate(edit);
+    } catch (Exception e) {
+      throw e ;
+    }
+    return newClass;
+  }
 }

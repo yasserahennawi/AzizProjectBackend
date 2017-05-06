@@ -89,4 +89,21 @@ public class StaffRepository {
     return staff;
   }
 
+  public Staff editStaff(Staff oldStaff, Staff newStaff) throws Exception {
+    try {
+      String edit = 
+        "UPDATE staff SET "
+        + "staff_id = '" + newStaff.getStaff_id()
+        + "', staff_firstname = '" + newStaff.getStaff_firstname()
+        + "', staff_secondname = '" + newStaff.getStaff_secondname()
+        + "', ganeder = '" + newStaff.getGaneder()
+        + "', degree = '" + newStaff.getDegree()
+        + "', address = '" + newStaff.getAddress()
+        + "' WHERE staff_id = '" + oldStaff.getStaff_id()+"'";
+      stat.executeUpdate(edit);
+    } catch (Exception e) {
+      throw e ;
+    }
+    return newStaff;
+  }
 }

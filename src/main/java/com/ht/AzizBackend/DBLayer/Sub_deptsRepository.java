@@ -79,4 +79,18 @@ public class Sub_deptsRepository {
     return sub_dept;
   }
 
+  public Sub_dept editSub_dept(Sub_dept oldSub_dept, Sub_dept newSub_dept) throws Exception {
+    try {
+      String edit = 
+        "UPDATE sub_depts SET "
+        + "sub_depts_id = '" + newSub_dept.getSub_depts_id()
+        + "', sub_depts_name = '" + newSub_dept.getSub_depts_name()
+        + "' WHERE sub_depts_id = '" + oldSub_dept.getSub_depts_id()+"'";
+      stat.executeUpdate(edit);
+    } catch (Exception e) {
+      throw e ;
+    }
+    return newSub_dept;
+  }
+  
 }

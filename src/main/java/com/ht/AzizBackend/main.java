@@ -13,9 +13,10 @@ import com.ht.AzizBackend.DBLayer.Sub_deptsRepository;
 import com.ht.AzizBackend.DBLayer.SubjectsRepository;
 import com.ht.AzizBackend.ModelLayer.Classes;
 import com.ht.AzizBackend.ModelLayer.Staff;
+import com.ht.AzizBackend.ModelLayer.Student;
+import com.ht.AzizBackend.ModelLayer.Sub_dept;
+import com.ht.AzizBackend.ModelLayer.Subject;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import spark.Request;
 import spark.Response;
 import static spark.Spark.*;
@@ -29,6 +30,7 @@ public class main {
     Sub_deptsRepository sub_deptsRepository = new Sub_deptsRepository();
     SubjectsRepository subjectsRepository = new SubjectsRepository();
     ArrayList<Staff> staff;
+    
 
     enableCORS("*", "*", "*");
 
@@ -36,7 +38,7 @@ public class main {
 
     get("/", (Request req, Response res) -> {
       System.out.println("wzza tezo 7mra");
-      return "wzza tezo 7mra";
+      return "Hello world";
     });
 
     get("/api/staffs", (req, res) -> {
@@ -54,6 +56,26 @@ public class main {
         String json = gson.toJson(staffRepository.getStaffByID(req.params(":staff_id")));
         res.type("application/json");
         return json;
+      } catch (Exception e) {
+        return e;
+      }
+    });
+    post("/api/staffs", (req, res) -> {
+      try {
+        Staff newStaff = new Staff(req.queryParams("id"), req.queryParams("firstname"), req.queryParams("secondname"), req.queryParams("ganeder"), req.queryParams("degree"), req.queryParams("address"));
+        res.type("application/json");
+        return staffRepository.addStaff(newStaff);
+      } catch (Exception e) {
+        return e;
+      }
+    });
+    
+    patch("/api/staffs/:staff_id", (req, res) -> {
+      try {
+        Staff oldStaff = staffRepository.getStaffByID(req.params(":staff_id")).get(0);
+        Staff newStaff = new Staff(req.queryParams("id"), req.queryParams("firstname"), req.queryParams("lastname"), req.queryParams("gander"), req.queryParams("section"), req.queryParams("division"));
+        res.type("application/json");
+        return staffRepository.editStaff(oldStaff, newStaff);
       } catch (Exception e) {
         return e;
       }
@@ -78,6 +100,26 @@ public class main {
         return e;
       }
     });
+    post("/api/classes", (req, res) -> {
+      try {
+        Classes newClass = new Classes(req.queryParams("id"), req.queryParams("type"));
+        res.type("application/json");
+        return classesRepository.addClasses(newClass);
+      } catch (Exception e) {
+        return e;
+      }
+    });
+    
+    patch("/api/classes/:class_id", (req, res) -> {
+      try {
+        Classes oldClass = classesRepository.getClassesByID(req.params(":class_id")).get(0);
+        Classes newClass = new Classes(req.queryParams("id"),req.queryParams("type"));
+        res.type("application/json");
+        return classesRepository.editClass(oldClass, newClass);
+      } catch (Exception e) {
+        return e;
+      }
+    });
 
     get("/api/students", (req, res) -> {
       try {
@@ -98,7 +140,27 @@ public class main {
         return e;
       }
     });
-
+    post("/api/students", (req, res) -> {
+      try {
+        Student newStudent = new Student(req.queryParams("id"), req.queryParams("firstname"), req.queryParams("lastname"), req.queryParams("gender"), req.queryParams("section"), req.queryParams("division"), req.queryParams("stage"), req.queryParams("address"));
+        res.type("application/json");
+        return studentsRepository.addStudent(newStudent);
+      } catch (Exception e) {
+        return e;
+      }
+    });
+    
+    patch("/api/students/:student_id", (req, res) -> {
+      try {
+        Student oldStudent = studentsRepository.getStudentByID(req.params(":student_id")).get(0);
+        Student newStudent = new Student(req.queryParams("id"),req.queryParams("firstname"),req.queryParams("lastname"),req.queryParams("gender"),req.queryParams("section"),req.queryParams("division"),req.queryParams("stage"),req.queryParams("address"));
+        res.type("application/json");
+        return studentsRepository.editStudent(oldStudent, newStudent);
+      } catch (Exception e) {
+        return e;
+      }
+    });
+    
     get("/api/subjects", (req, res) -> {
       try {
         String json = gson.toJson(subjectsRepository.getAllSubject());
@@ -114,6 +176,27 @@ public class main {
         String json = gson.toJson(subjectsRepository.getSubjectByID(req.params(":subject_id")));
         res.type("application/json");
         return json;
+      } catch (Exception e) {
+        return e;
+      }
+    });
+
+    post("/api/subjects", (req, res) -> {
+      try {
+        Subject newSubject = new Subject(req.queryParams("id"), req.queryParams("subdeptname"), req.queryParams("subjectname"), req.queryParams("chr"), req.queryParams("degree"));
+        res.type("application/json");
+        return subjectsRepository.addSubject(newSubject);
+      } catch (Exception e) {
+        return e;
+      }
+    });
+    
+    patch("/api/subjects/:subject_id", (req, res) -> {
+      try {
+        Subject oldSubject = subjectsRepository.getSubjectByID(req.params(":subject_id")).get(0);
+        Subject newSubject = new Subject(req.queryParams("id"), req.queryParams("subdeptname"), req.queryParams("subjectname"), req.queryParams("chr"), req.queryParams("degree"));
+        res.type("application/json");
+        return subjectsRepository.editSubject(oldSubject, newSubject);
       } catch (Exception e) {
         return e;
       }
@@ -139,6 +222,27 @@ public class main {
       }
     });
 
+    post("/api/sub_depts", (req, res) -> {
+      try {
+        Sub_dept newSub_dept = new Sub_dept(req.queryParams("id"), req.queryParams("name"));
+        res.type("application/json");
+        return sub_deptsRepository.addSub_dept(newSub_dept);
+      } catch (Exception e) {
+        return e;
+      }
+    });
+    
+    patch("/api/sub_depts/:sub_dept_id", (req, res) -> {
+      try {
+        Sub_dept oldSub_dept = sub_deptsRepository.getSub_deptByID(req.params(":sub_dept_id")).get(0);
+        Sub_dept newSub_dept = new Sub_dept(req.queryParams("id"), req.queryParams("name"));
+        res.type("application/json");
+        return sub_deptsRepository.editSub_dept(oldSub_dept, newSub_dept);
+      } catch (Exception e) {
+        return e;
+      }
+    });
+    
     delete("/api/classes/:classes_id", (req, res) -> {
       try {
         res.type("application/json");

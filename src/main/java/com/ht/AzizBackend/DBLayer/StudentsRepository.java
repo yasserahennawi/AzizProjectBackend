@@ -93,4 +93,24 @@ public class StudentsRepository {
     return student;
   }
 
+  public Student editStudent(Student oldStudent, Student newStudent) throws Exception {
+    try {
+      String edit = 
+        "UPDATE students SET "
+        + "student_id = '" + newStudent.getStudent_ID()
+        + "', student_firstname = '" + newStudent.getStudent_Firstname()
+        + "', student_lastname = '" + newStudent.getStudent_lastname()
+        + "', student_gander = '" + newStudent.getStudent_gander()
+        + "', section = '" + newStudent.getSection()
+        + "', division = '" + newStudent.getDivision()
+        + "', stage = '" + newStudent.getStage()
+        + "', address = '" + newStudent.getAddress()
+        + "' WHERE student_id = '" + oldStudent.getStudent_ID()+"'";
+      stat.executeUpdate(edit);
+    } catch (Exception e) {
+      throw e ;
+    }
+    return newStudent;
+  }
+    
 }
