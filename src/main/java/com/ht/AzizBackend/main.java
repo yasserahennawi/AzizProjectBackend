@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ht.AzizBackend;
 
 import com.google.gson.Gson;
@@ -62,7 +58,7 @@ public class main {
     });
     post("/api/staffs", (req, res) -> {
       try {
-        Staff newStaff = new Staff(req.queryParams("id"), req.queryParams("firstname"), req.queryParams("secondname"), req.queryParams("ganeder"), req.queryParams("degree"), req.queryParams("address"));
+        Staff newStaff = new Staff(req.queryParams("id"), req.queryParams("firstname"), req.queryParams("secondname"), req.queryParams("gender"), req.queryParams("degree"), req.queryParams("address"));
         res.type("application/json");
         return staffRepository.addStaff(newStaff);
       } catch (Exception e) {
@@ -73,7 +69,7 @@ public class main {
     patch("/api/staffs/:staff_id", (req, res) -> {
       try {
         Staff oldStaff = staffRepository.getStaffByID(req.params(":staff_id")).get(0);
-        Staff newStaff = new Staff(req.queryParams("id"), req.queryParams("firstname"), req.queryParams("lastname"), req.queryParams("gander"), req.queryParams("section"), req.queryParams("division"));
+        Staff newStaff = new Staff(req.queryParams("id"), req.queryParams("firstname"), req.queryParams("secondname"), req.queryParams("gender"), req.queryParams("degree"), req.queryParams("address"));
         res.type("application/json");
         return staffRepository.editStaff(oldStaff, newStaff);
       } catch (Exception e) {
